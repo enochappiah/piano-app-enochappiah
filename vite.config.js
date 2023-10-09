@@ -2,5 +2,5 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "/hw4/",
+  base: "/homework-4-piano-app-enochappiah/",
 });
