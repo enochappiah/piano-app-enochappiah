@@ -1,6 +1,6 @@
 import {
-    NoteType,
-    pianoClass
+  NoteType,
+  pianoClass
 } from "./models";
 import "./style.css";
 
@@ -14,33 +14,22 @@ function createPianoListener() {
 }
 function handleKeyPress(e: Event) {
   e.preventDefault();
-  const target = (e.target as HTMLElement)
-  if (target!.closest(".natural-key") || target!.closest(".accidental-key")) { 
+  const target : HTMLElement = (e.target as HTMLElement)
+
+    if (target.tagName === "BUTTON") { 
     playSound(target);
   } else {
-    console.error("Please click a key");
+    return;
   }
 
 }
 
 function playSound(note : HTMLElement) {
   const noteId : string = note.id;
-  const key = (Object.keys(pianoKeys) as Array<NoteType>).find(key => pianoKeys[key].id === noteId);
-  console.log(key);
-  const sound = pianoKeys[key!].sound;
-  // sound.play();
+  const key  = (Object.keys(pianoKeys) as Array<NoteType>).find(key => pianoKeys[key].id === noteId);
+  const sound : HTMLAudioElement = pianoKeys[key!].sound;
 
-
-  // // Pause and rewind the audio to the beginning
-  // sound.pause();
-  // //sound.load();
-  // sound.currentTime = 0;
-  
-  // // Play the audio
-  // sound.play();
-
-  var soundPromise = sound.play();
-
+  var soundPromise : Promise<void> = sound.play();
   if (soundPromise !== undefined) {
     soundPromise.then(()=> {
       sound.play();
@@ -48,21 +37,11 @@ function playSound(note : HTMLElement) {
       sound.currentTime = 0;
       sound.play(); 
     })
-    // sound.play();
-    // sound.pause();
-    // sound.currentTime = 0;
-    // sound.play();
     .catch(error =>{
       console.error("Audio playback error:", error);
     });
   }
 }
 
-
-//do event listener when dom content loaded
-document.addEventListener("DOMContentLoaded", () => {
-  createPianoListener();
-
-
-});
+document.addEventListener("DOMContentLoaded", createPianoListener);
 
