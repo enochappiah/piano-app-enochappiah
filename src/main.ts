@@ -1,8 +1,6 @@
 import { NoteInfo, NoteType, notes } from "./models";
 import "./style.css";
 
-//const piano: PianoClass = new PianoClass();
-//const pianoKeys: Record<NoteType, NoteInfo> = piano.pianoKeys;
 const pianoKeys: Record<NoteType, NoteInfo> = notes;
 
 function createPianoListener(): void {
@@ -35,7 +33,7 @@ function playSound(note: HTMLElement): void {
   if (soundPromise !== undefined) {
     soundPromise
       .then(() => {
-        sound.play();
+        //sound.play();
         sound.pause();
         sound.currentTime = 0;
         sound.play();

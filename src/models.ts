@@ -3,14 +3,6 @@ export interface NoteInfo {
   sound: string;
 }
 
-// export class Piano {
-//   pianoKeys: Record<NoteType, NoteInfo> = notes;
-// }
-
-export class PianoClass {
-  pianoKeys: Record<NoteType, NoteInfo> = notes;
-}
-
 type whiteKey = "A" | "B" | "C" | "D" | "E" | "F" | "G";
 type blackKey = "A-sharp" | "C-sharp" | "D-sharp" | "F-sharp" | "G-sharp";
 export type NoteType = whiteKey | blackKey;
