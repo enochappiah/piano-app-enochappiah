@@ -1,4 +1,4 @@
-import { NoteInfo, NoteType, PianoClass, notes } from "./models";
+import { NoteInfo, NoteType, notes } from "./models";
 import "./style.css";
 
 //const piano: PianoClass = new PianoClass();
