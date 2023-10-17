@@ -29,6 +29,8 @@ function playSound(note: HTMLElement): void {
   const soundFile: string = pianoKeys[key!].sound;  
   const sound: HTMLAudioElement = new Audio(soundFile);
 
+
+  //TODO change to not use promise pattern
   var soundPromise: Promise<void> = sound.play();
   if (soundPromise !== undefined) {
     soundPromise
