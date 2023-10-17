@@ -1,8 +1,9 @@
-import { NoteInfo, NoteType, PianoClass } from "./models";
+import { NoteInfo, NoteType, PianoClass, notes } from "./models";
 import "./style.css";
 
-const piano: PianoClass = new PianoClass();
-const pianoKeys: Record<NoteType, NoteInfo> = piano.pianoKeys;
+//const piano: PianoClass = new PianoClass();
+//const pianoKeys: Record<NoteType, NoteInfo> = piano.pianoKeys;
+const pianoKeys: Record<NoteType, NoteInfo> = notes;
 
 function createPianoListener(): void {
   const pianoContainerArr: HTMLCollection =
