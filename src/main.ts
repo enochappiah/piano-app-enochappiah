@@ -26,7 +26,9 @@ function playSound(note: HTMLElement): void {
   const key = (Object.keys(pianoKeys) as Array<NoteType>).find(
     (key) => pianoKeys[key].id === noteId,
   ); //TODO how to get typescript type for this
-  const sound: HTMLAudioElement = pianoKeys[key!].sound;
+  // const soundFile: HTMLAudioElement = pianoKeys[key!].sound;
+  const soundFile: string = pianoKeys[key!].sound;  
+  const sound = new Audio(soundFile);
 
   var soundPromise: Promise<void> = sound.play();
   if (soundPromise !== undefined) {
