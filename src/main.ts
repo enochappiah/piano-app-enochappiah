@@ -23,10 +23,10 @@ function handleKeyPress(e: Event): void {
 
 function playSound(note: HTMLElement): void {
   const noteId: string = note.id;
-  const key = (Object.keys(pianoKeys) as Array<NoteType>).find(
+  const key: NoteType = (Object.keys(pianoKeys) as Array<NoteType>).find(
     (key) => pianoKeys[key].id === noteId,
-  ) as NoteType; //TODO how to get typescript type for this
-  // const soundFile: HTMLAudioElement = pianoKeys[key!].sound;
+  ) as NoteType; 
+  
   const soundFile: string = pianoKeys[key!].sound;  
   const sound: HTMLAudioElement = new Audio(soundFile);
 

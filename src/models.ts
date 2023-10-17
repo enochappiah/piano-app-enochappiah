@@ -1,14 +1,13 @@
 export interface NoteInfo {
   id: string;
-  //sound: HTMLAudioElement;
   sound: string;
 }
 
-export interface Piano {
-  pianoKeys: Record<NoteType, NoteInfo>;
-}
+// export class Piano {
+//   pianoKeys: Record<NoteType, NoteInfo> = notes;
+// }
 
-export class PianoClass implements Piano {
+export class PianoClass {
   pianoKeys: Record<NoteType, NoteInfo> = notes;
 }
 
@@ -16,7 +15,7 @@ type whiteKey = "A" | "B" | "C" | "D" | "E" | "F" | "G";
 type blackKey = "A-sharp" | "C-sharp" | "D-sharp" | "F-sharp" | "G-sharp";
 export type NoteType = whiteKey | blackKey;
 
-const notes: Record<NoteType, NoteInfo> = {
+export const notes: Record<NoteType, NoteInfo> = {
   A: { id: "A", sound: ("./sounds/piano_A.mp3") },
   B: { id: "B", sound: ("./sounds/piano_B.mp3") },
   C: { id: "C", sound: ("./sounds/piano_C.mp3") },
