@@ -31,22 +31,42 @@ function playSound(note: HTMLElement): void {
 
 
   //TODO change to not use promise pattern
-  var soundPromise: Promise<void> = sound.play();
-  if (soundPromise !== undefined) {
-    soundPromise
-      .then(() => {
-        //sound.play();
-        sound.pause();
-        sound.currentTime = 0;
-        sound.play();
-      })
-      .catch((error) => {
-        alert(
-          "Error with audio playback. Please look at the console for details and try again later.",
-        );
-        console.error("Audio playback error:", error.message);
-      });
-  }
+  //sound.load();
+
+  sound.addEventListener("error", () => {
+    console.error(`${key} key file loading error`);
+    alert(
+      "Error with audio playback. Please look at the console for details and try again later.",
+    );
+    
+  });
+
+  sound.addEventListener("canplaythrough", () => {
+    sound.play()
+    
+  });
+    sound.pause();
+    sound.currentTime = 0;
+    //sound.play();
+    sound.load();
+
+
+  // var soundPromise: Promise<void> = sound.play();
+  // if (soundPromise !== undefined) {
+  //   soundPromise
+  //     .then(() => {
+  //       //sound.play();
+  //       sound.pause();
+  //       sound.currentTime = 0;
+  //       sound.play();
+  //     })
+  //     .catch((error) => {
+  //       alert(
+  //         "Error with audio playback. Please look at the console for details and try again later.",
+  //       );
+  //       console.error("Audio playback error:", error.message);
+  //     });
+  // }
 }
 
 document.addEventListener("DOMContentLoaded", createPianoListener);
