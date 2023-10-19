@@ -1,8 +1,10 @@
 import { NoteInfo, NoteType, notes } from "./models";
 import "./style.css";
 
+// Record of each note mapped to its sound filepath
 const pianoKeys: Record<NoteType, NoteInfo> = notes;
 
+// attach eventListener to pianoContainer element
 function createPianoListener(): void {
   const pianoContainerArr: HTMLCollection =
     document.getElementsByClassName("piano-container");
@@ -10,8 +12,11 @@ function createPianoListener(): void {
   pianoContainer.addEventListener("click", handleKeyPress);
 }
 
+// calls playSound function if user clicks a key button
 function handleKeyPress(e: Event): void {
   e.preventDefault();
+
+  // cast target as HTMLElement to access event.target attribute
   const target: HTMLElement = e.target as HTMLElement;
   if (target.tagName === "BUTTON") {
     playSound(target);
@@ -20,53 +25,39 @@ function handleKeyPress(e: Event): void {
   }
 }
 
+// play sound of button user clicks and handles audio playback & errors
 function playSound(note: HTMLElement): void {
+  // gets the id of the note the user clicked
   const noteId: string = note.id;
+
+  // converts keys in pianoKeys record to an array of NoteType to find
+  // the record key,value pair corresponding to the note id of the user clicked button
   const key: NoteType = (Object.keys(pianoKeys) as Array<NoteType>).find(
     (key) => pianoKeys[key].id === noteId,
-  ) as NoteType; 
-  
-  const soundFile: string = pianoKeys[key!].sound;  
+  ) as NoteType;
+
+  // gets the file path (value) of the key
+  const soundFile: string = pianoKeys[key!].sound;
+
+  // creates new audio
   const sound: HTMLAudioElement = new Audio(soundFile);
 
-
-  //TODO change to not use promise pattern
-  //sound.load();
+  // adding canplaythrough event listener & error event listener replaces play/catch chaining
+  sound.addEventListener("canplaythrough", () => {
+    sound.play();
+  });
 
   sound.addEventListener("error", () => {
     console.error(`${key} key file loading error`);
     alert(
       "Error with audio playback. Please look at the console for details and try again later.",
     );
-    
   });
 
-  sound.addEventListener("canplaythrough", () => {
-    sound.play()
-    
-  });
-    sound.pause();
-    sound.currentTime = 0;
-    //sound.play();
-    sound.load();
-
-
-  // var soundPromise: Promise<void> = sound.play();
-  // if (soundPromise !== undefined) {
-  //   soundPromise
-  //     .then(() => {
-  //       //sound.play();
-  //       sound.pause();
-  //       sound.currentTime = 0;
-  //       sound.play();
-  //     })
-  //     .catch((error) => {
-  //       alert(
-  //         "Error with audio playback. Please look at the console for details and try again later.",
-  //       );
-  //       console.error("Audio playback error:", error.message);
-  //     });
-  // }
+  // allows user to spam keys and have sound play successively
+  sound.pause();
+  sound.currentTime = 0;
+  sound.load();
 }
 
 document.addEventListener("DOMContentLoaded", createPianoListener);
